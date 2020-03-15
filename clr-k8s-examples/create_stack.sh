@@ -23,9 +23,9 @@ K8S_VER="${CLRK8S_K8S_VER:-}"
 KATA_VER="${CLRK8S_KATA_VER:-1.10.1-kernel-config}"
 ROOK_VER="${CLRK8S_ROOK_VER:-v1.1.7}"
 METRICS_VER="${CLRK8S_METRICS_VER:-v0.3.6}"
-DASHBOARD_VER="${CLRK8S_DASHBOARD_VER:-v2.0.0-beta2}"
+DASHBOARD_VER="${CLRK8S_DASHBOARD_VER:-v2.0.0-rc6}"
 INGRES_VER="${CLRK8S_INGRES_VER:-nginx-0.26.1}"
-EFK_VER="${CLRK8S_EFK_VER:-v1.15.1}"
+EFK_VER="${CLRK8S_EFK_VER:-v1.17.1}"
 METALLB_VER="${CLRK8S_METALLB_VER:-v0.8.3}"
 NPD_VER="${CLRK8S_NPD_VER:-v0.6.6}"
 PROMETHEUS_VER="${CLRK8S_PROMETHEUS_VER:-f458e85e5d7675f7bc253072e1b4c8892b51af0f}"
@@ -309,7 +309,7 @@ function miscellaneous() {
 	efk
 
 	#Create an ingress load balancer
-	ingres
+	#ingres
 
 	#Create a bare metal load balancer.
 	#kubectl apply -f 6-metal-lb/metallb.yaml
@@ -367,6 +367,7 @@ command_handlers[monitoring]=monitoring
 command_handlers[metallb]=metallb
 command_handlers[npd]=npd
 command_handlers[nfd]=nfd
+command_handlers[miscellaneous]=miscellaneous
 
 declare -A command_help
 command_help[init]="Only inits a cluster using kubeadm"
@@ -374,7 +375,9 @@ command_help[cni]="Setup network for running cluster"
 command_help[minimal]="init + cni +  kata + metrics"
 command_help[all]="minimal + storage + monitoring + miscellaneous"
 command_help[help]="show this message"
+command_help[npd]="node problem detector"
 command_help[nfd]="node feature discovery"
+command_help[miscellaneous]="dashboard + efk"
 
 cd "${SCRIPT_DIR}"
 
