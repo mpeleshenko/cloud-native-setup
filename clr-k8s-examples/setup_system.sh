@@ -14,7 +14,7 @@ ADD_NO_PROXY+=",$(hostname -I | sed 's/[[:space:]]/,/g')"
 if [[ -z "${RUNNER+x}" ]]; then RUNNER="${CLRK8S_RUNNER:-crio}"; fi
 
 # update os version
-function upate_os_version() {
+function update_os_version() {
 	if [[ -n "${CLR_VER}" ]]; then
 		sudo swupd repair -m "${CLR_VER}" --picky --force
 		return
@@ -187,7 +187,7 @@ fi
 echo "Init..."
 init
 echo "Setting OS Version..."
-upate_os_version
+update_os_version
 echo "Adding OS Dependencies..."
 add_os_deps
 echo "Disabling swap..."
